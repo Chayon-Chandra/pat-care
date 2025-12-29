@@ -5,6 +5,7 @@ import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
 import Services from '../pages/Services/Services';
+import ServiceDetails from '../Componentes/ServiceDetails/ServiceDetails';
 
 
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path:"/profile",
         Component:Profile
+      },
+      {
+        path:"/services/:id",
+         Component: ServiceDetails
       }
 
 
