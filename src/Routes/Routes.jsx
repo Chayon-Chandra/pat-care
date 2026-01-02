@@ -6,6 +6,10 @@ import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
 import Services from '../pages/Services/Services';
 import ServiceDetails from '../Componentes/ServiceDetails/ServiceDetails';
+import LogIn from '../Componentes/LogIn/LogIn';
+import Register from '../Componentes/Register/Register';
+import PriveteRoutes from '../PriveteRoutes/PriveteRoutes';
+
 
 
 
@@ -27,11 +31,24 @@ const router = createBrowserRouter([
       },
       {
         path:"/profile",
-        Component:Profile
+        element: <PriveteRoutes>
+          <Profile></Profile>
+        </PriveteRoutes>
+        
       },
       {
         path:"/services/:id",
-         Component: ServiceDetails
+         element: <PriveteRoutes>
+          <ServiceDetails></ServiceDetails>
+         </PriveteRoutes>
+      },
+      {
+        path:"/login",
+        Component: LogIn
+      },
+      {
+        path:"/register",
+        Component: Register
       }
 
 

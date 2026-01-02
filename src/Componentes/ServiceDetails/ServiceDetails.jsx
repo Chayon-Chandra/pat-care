@@ -2,6 +2,7 @@ import React from "react";
 import useProductes from "../../Hooks/useProductes";
 import { useParams } from "react-router";
 import ratingImg from "../../assets/icon-ratings.png";
+import BookServiceForm from "../BookServiceForm/BookServiceForm";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ const ServiceDetails = () => {
 
       <p className="mt-4 text-gray-600">{description}</p>
 
-      <button className="btn btn-primary mt-6">Book This Service</button>
+      <BookServiceForm></BookServiceForm>
     </div>
   );
 };

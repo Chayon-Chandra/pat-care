@@ -7,8 +7,12 @@ import { Link } from "react-router";
 import WinterCare from "../../Componentes/WinterCare/WinterCare";
 import ExpertVets from "../../Componentes/ExpertVets/ExpertVets";
 import Breeds from "../../Componentes/Breeds/Breeds";
+import { AuthConText } from "../../Context/AuthContext/AuthContext";
+
+
 
 const Home = () => {
+  
   const { products } = useProductes();
   const sliceService = products.slice(0, 6);
   return (
