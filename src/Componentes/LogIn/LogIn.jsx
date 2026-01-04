@@ -3,9 +3,12 @@ import React, { use, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthConText } from "../../Context/AuthContext/AuthContext";
 import { auth } from "../../firebase/firebase.init";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
 
 const LogIn = () => {
   const [error, setError] = useState("");
+  const [loginShowPasword, setLoginShowPassword] = useState(false);
 
   const emailRaf = useRef();
   const { signIn, setLoading } = use(AuthConText);
@@ -38,23 +41,6 @@ const LogIn = () => {
       });
   };
 
-  // const handleLogIn = (event) =>{
-  //   event.preventDefault();
-  //   const email = event.target.email.value;
-  //   const password = event.target.password.value;
-
-  //   setError('');
-
-  //   signInWithEmailAndPassword(auth, email, password)
-  //   .then( result =>{
-  //     console.log(result.user)
-  //   })
-  //   .catch(error => {
-  //     setError(error.message)
-  //   })
-
-  // }
-
   const handleForgetPassword = () => {
     const email = emailRaf.current.value;
     sendPasswordResetEmail(auth, email)
@@ -65,6 +51,11 @@ const LogIn = () => {
         setError(error.message);
       });
   };
+
+  const handleLoginPassword = (event) =>{
+    event.preventDefault();
+    setLoginShowPassword(!loginShowPasword);
+  }
 
   return (
     <div className="hero bg-base-200 min-h-screen py-5">
@@ -82,12 +73,17 @@ const LogIn = () => {
                 placeholder="Email"
               />
               <label className="label">Password</label>
-              <input
-                type="password"
-                className="input"
-                name="password"
-                placeholder="Password"
-              />
+              <div>
+                <input
+                  type={loginShowPasword ? "text" : "password"}
+                  className="input relative"
+                  name="password"
+                  placeholder="Password"
+                />
+                <button onClick={handleLoginPassword} className="btn-xs absolute right-13 top-45">
+                  {loginShowPasword ? <FiEyeOff /> : <FiEye />}
+                </button>
+              </div>
               <div>
                 <a onClick={handleForgetPassword} className="link link-hover">
                   Forgot password?

@@ -66,50 +66,6 @@ const Register = () => {
      
   };
 
-  // const registerHandle = (e) => {
-  //   e.preventDefault();
-  //   const name = e.target.name.value;
-  //   const photo = e.target.photo.value;
-  //   const email = e.target.email.value;
-  //   const password = e.target.password.value;
-
-  //   const passwordRegex =
-  //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
-  //   if (!passwordRegex.test(password)) {
-  //     setError(
-  //       "Password must be at least 6 characters and include 1 lowercase, 1 uppercase, and 1 special character"
-  //     );
-  //     return;
-  //   }
-
-  //   setError("");
-  //   setRegisterSuccess(false);
-
-  //   createUserWithEmailAndPassword(auth, email, password)
-  //     .then((result) => {
-  //       console.log(result.user);
-  //       setRegisterSuccess(true);
-  //       e.target.reset();
-
-  //       const profile = {
-  //         displayName: name,
-  //         photoURL: photo
-  //       }
-  //       updateProfile(result.user, profile)
-  //       .then(() =>{})
-  //       .catch((error) => {
-  //         console.log(error.message)
-  //       })
-
-  //       sendEmailVerification(result.user).then(() => {
-  //         alert("Please verification your email");
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setError(error.message);
-  //     });
-  // };
 
   const handleRegistershwoPassword = (event) => {
     event.preventDefault();
