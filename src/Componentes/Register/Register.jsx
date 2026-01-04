@@ -1,36 +1,75 @@
-// import {
-//   createUserWithEmailAndPassword,
-//   sendEmailVerification,
-//   updateProfile,
-// } from "firebase/auth";
 import React, { use, useState } from "react";
 import { Link } from "react-router";
-// import { auth } from "../../firebase/firebase.init";
+
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthConText } from "../../Context/AuthContext/AuthContext";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 
 const Register = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [error, setError] = useState("");
   const [registerShowPassword, setRegisterShowPassword] = useState(false);
 
-const {createUser} = use(AuthConText);
-
+  const { createUser, setLoading } = use(AuthConText);
 
   const registerHandle = (e) => {
     e.preventDefault();
+
+    const name = e.target.name.value;
+    const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-        createUser(email, password)
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+    //    if (!passwordRegex.test(password)) {
+    //   setError(
+    //     "Password must be at least 6 characters and include 1 lowercase, 1 uppercase, and 1 special character"
+    //   );
+    //   return;
+    // }
+    setError("");
+    setRegisterSuccess(false);
 
-        .then(result => {
-          console.log(result.user)
-        })
-        .catch(error => {
-         console.log(error.message)
-        })
-    
-  }
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        setRegisterSuccess(true);
+        e.target.reset();
+
+        const profile = {
+          displayName: name,
+          photoURL: photo,
+        };
+        updateProfile(result.user, profile)
+          .then(() => {
+            
+          })
+          .catch((error) => {
+            console.log(error.message);
+          }).finally(() =>{
+            setLoading(false)
+          })
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
+
+      sendEmailVerification(result.user)
+      .then(() => {
+        alert("Please verification your email")
+      })
+      .catch((error) =>{
+        setError(error.message)
+      })
+
+      // sendPasswordResetEmail(result.user)
+      // .then(() => {
+      //   alert("Please verification your email")
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      //   setError(error.message);
+      // });
+  };
 
   // const registerHandle = (e) => {
   //   e.preventDefault();
@@ -103,6 +142,7 @@ const {createUser} = use(AuthConText);
                 placeholder="Photo URL"
                 name="photo"
               />
+
               <label className="label">Email</label>
               <input
                 type="email"

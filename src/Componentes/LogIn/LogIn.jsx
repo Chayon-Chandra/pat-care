@@ -1,15 +1,17 @@
-// import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import React, { use, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthConText } from "../../Context/AuthContext/AuthContext";
-// import { auth } from "../../firebase/firebase.init";
+import { auth } from "../../firebase/firebase.init";
+
+
 
 
 const LogIn = () => {
   const [error,  setError] = useState('');
 
   const emailRaf =useRef();
-  const {signIn} = use(AuthConText);
+  const {signIn, setLoading} = use(AuthConText);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,6 +20,9 @@ const LogIn = () => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
+
+    setError("");
+
       signIn(email, password)
       .then(result => {
         console.log(result.user)
@@ -25,8 +30,10 @@ const LogIn = () => {
         navigate(location.state || '/')
       })
       .catch(error => {
-        console.log(error.message)
-      })
+        setError(error.message)
+      }).finally(() =>{
+            setLoading(false)
+          })
     
   }
 
@@ -76,6 +83,7 @@ const handleForgetPassword = () => {
               <button className="btn btn-neutral mt-4">Login</button>
             </fieldset>
           </form>
+
           
           {
               error && <p className="text-red-500">{error}</p>

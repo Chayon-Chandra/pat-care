@@ -1,10 +1,10 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "/logo.png"
 import { AuthConText } from "../../Context/AuthContext/AuthContext";
 
 const NavBar = () => {
-  const {user, signOutUser} = use(AuthConText)
+  const {user, signOutUser} = useContext(AuthConText)
 
   const handleSignOutUser = () =>{
     signOutUser()
@@ -65,7 +65,15 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        {user ? <a onClick={handleSignOutUser} className="btn">Sign Out</a> : <Link to="/login" className="btn">Login</Link>}
+        <div className="pr-3 relative group">
+           <img className="w-10 h-10 rounded-full object-cover cursor-pointer " src={user?.photoURL ||"https://i.ibb.co.com/fzHgBZ2d/images-15.jpg"} alt="" />
+            <span className="absolute right-full top-1/2 -translate-y-1/2 mr-2 bg-black text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              {user?.displayName || "User Name"}
+            </span>
+        </div>
+        <div>
+          {user ? <a onClick={handleSignOutUser} className="btn">Sign Out</a> : <Link to="/login" className="btn">Login</Link>}
+        </div>
         
       </div>
     </div>
