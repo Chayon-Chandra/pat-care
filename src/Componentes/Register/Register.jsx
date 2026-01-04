@@ -5,6 +5,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthConText } from "../../Context/AuthContext/AuthContext";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 
+
 const Register = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -30,8 +31,17 @@ const Register = () => {
     setRegisterSuccess(false);
 
     createUser(email, password)
+
       .then((result) => {
         console.log(result.user);
+        sendEmailVerification(result.user)
+        .then(() => {
+        alert("Please verification your email")
+      })
+      .catch((error) =>{
+        setError(error.message)
+      })
+
         setRegisterSuccess(true);
         e.target.reset();
 
@@ -53,22 +63,7 @@ const Register = () => {
         console.log(error.message);
       })
 
-      sendEmailVerification(result.user)
-      .then(() => {
-        alert("Please verification your email")
-      })
-      .catch((error) =>{
-        setError(error.message)
-      })
-
-      // sendPasswordResetEmail(result.user)
-      // .then(() => {
-      //   alert("Please verification your email")
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      //   setError(error.message);
-      // });
+     
   };
 
   // const registerHandle = (e) => {
@@ -174,7 +169,7 @@ const Register = () => {
             {error && <p className="text-red-500">{error}</p>}
           </form>
           <p className="text-center">
-            {" "}
+        
             Have an Account?
             <Link to="/login" className="text-blue-600 underline">
               Log Here

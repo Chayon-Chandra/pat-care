@@ -4,67 +4,67 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthConText } from "../../Context/AuthContext/AuthContext";
 import { auth } from "../../firebase/firebase.init";
 
-
-
-
 const LogIn = () => {
-  const [error,  setError] = useState('');
+  const [error, setError] = useState("");
 
-  const emailRaf =useRef();
-  const {signIn, setLoading} = use(AuthConText);
+  const emailRaf = useRef();
+  const { signIn, setLoading } = use(AuthConText);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLogIn = (event) =>{
+  const handleLogIn = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
 
     setError("");
 
-      signIn(email, password)
-      .then(result => {
-        console.log(result.user)
+    signIn(email, password)
+      .then((result) => {
+        console.log(result.user);
+
+        if (!result.user.emailverified) {
+          setError("please verified your email");
+        }
         event.target.reset();
-        navigate(location.state || '/')
+        navigate(location.state || "/");
       })
-      .catch(error => {
-        setError(error.message)
-      }).finally(() =>{
-            setLoading(false)
-          })
-    
-  }
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
-// const handleLogIn = (event) =>{
-//   event.preventDefault();
-//   const email = event.target.email.value;
-//   const password = event.target.password.value;
+  // const handleLogIn = (event) =>{
+  //   event.preventDefault();
+  //   const email = event.target.email.value;
+  //   const password = event.target.password.value;
 
-//   setError('');
-   
-//   signInWithEmailAndPassword(auth, email, password)
-//   .then( result =>{
-//     console.log(result.user)
-//   })
-//   .catch(error => {
-//     setError(error.message)
-//   })
+  //   setError('');
 
+  //   signInWithEmailAndPassword(auth, email, password)
+  //   .then( result =>{
+  //     console.log(result.user)
+  //   })
+  //   .catch(error => {
+  //     setError(error.message)
+  //   })
 
-// }
+  // }
 
-const handleForgetPassword = () => {
-  const email = emailRaf.current.value;
- sendPasswordResetEmail(auth, email)
- .then(() => {
-  alert("please cheek your email")
- })
- .catch((error) => {
-  console.log(error.message)
- })
-}
+  const handleForgetPassword = () => {
+    const email = emailRaf.current.value;
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("please cheek your email");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
 
   return (
     <div className="hero bg-base-200 min-h-screen py-5">
@@ -74,21 +74,36 @@ const handleForgetPassword = () => {
           <form onSubmit={handleLogIn}>
             <fieldset className="fieldset">
               <label className="label">Email</label>
-              <input ref={emailRaf} type="email" className="input" name="email" placeholder="Email" />
+              <input
+                ref={emailRaf}
+                type="email"
+                className="input"
+                name="email"
+                placeholder="Email"
+              />
               <label className="label">Password</label>
-              <input type="password" className="input" name="password" placeholder="Password" />
+              <input
+                type="password"
+                className="input"
+                name="password"
+                placeholder="Password"
+              />
               <div>
-                <a onClick={handleForgetPassword} className="link link-hover">Forgot password?</a>
+                <a onClick={handleForgetPassword} className="link link-hover">
+                  Forgot password?
+                </a>
               </div>
               <button className="btn btn-neutral mt-4">Login</button>
             </fieldset>
           </form>
 
-          
-          {
-              error && <p className="text-red-500">{error}</p>
-            }
-          <p className="text-center">Don't have an account? <Link to="/register" className="text-blue-600 underline">Register</Link></p>
+          {error && <p className="text-red-500">{error}</p>}
+          <p className="text-center">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-blue-600 underline">
+              Register
+            </Link>
+          </p>
         </div>
       </div>
     </div>

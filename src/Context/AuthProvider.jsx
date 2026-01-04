@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AuthConText } from './AuthContext/AuthContext';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut,reload  } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut,reload, } from 'firebase/auth';
 import { auth } from '../firebase/firebase.init';
 
 const AuthProvider = ({children}) => {
@@ -21,6 +21,9 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return signOut(auth);
     }; 
+   
+
+
    const refreshUser = () => {
   return reload(auth.currentUser);
 };
