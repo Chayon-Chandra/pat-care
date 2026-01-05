@@ -26,7 +26,10 @@ const LogIn = () => {
     signIn(email, password)
       .then((result) => {
         console.log(result.user);
-
+          if(!result?.user?.emailVerified){
+            alert("you have to varifacation your account")
+            return
+          }
         if (!result.user.emailverified) {
           setError("please verified your email");
         }
