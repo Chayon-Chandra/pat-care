@@ -58,15 +58,17 @@ const LogIn = () => {
     event.preventDefault();
     setLoginShowPassword(!loginShowPasword);
   };
+
    const handleGoogleSignIn = () => {
     signInGoogle()
     .then(result => {
       console.log(result.user)
+      navigate(location.state || "/");
     })
     .catch((error) => {
-      setError(error.message)
+      console.log(error.message)
     })
-   }
+   };
 
   return (
     <div className="hero bg-base-200 min-h-screen py-5">
