@@ -10,7 +10,7 @@ const LogIn = () => {
   const [loginShowPasword, setLoginShowPassword] = useState(false);
 
   const emailRaf = useRef();
-  const { signIn, setLoading, signInGoogle } = use(AuthConText);
+  const { signIn, setLoading, signInGoogle, setUser } = use(AuthConText);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -25,14 +25,16 @@ const LogIn = () => {
     signIn(email, password)
       .then((result) => {
         console.log(result.user);
+
         if (!result?.user?.emailVerified) {
-          alert("you have to varifacation your account");
+          alert("you have to verification your account");
           return;
         }
         if (!result.user.emailverified) {
           setError("please verified your email");
         }
         event.target.reset();
+        setUser(result.user)
         navigate(location.state || "/");
       })
       .catch((error) => {
@@ -63,6 +65,7 @@ const LogIn = () => {
     signInGoogle()
     .then(result => {
       console.log(result.user)
+      setUser(result.user)
       navigate(location.state || "/");
     })
     .catch((error) => {

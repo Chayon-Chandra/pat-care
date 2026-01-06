@@ -3,16 +3,28 @@ import React, { useEffect, useState } from 'react';
 
 const useProductes = () => {
     const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
+    console.log(products)
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+
    
     useEffect(() =>{
-        setLoading (true)
+        const fetchData = async () => {
+    try {
+      setLoading(true)
+      const res = await axios.get('/data.json')
+      console.log(res)
+      setProducts(res.data)
+    } catch (err) {
+      setError(err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
-        axios('/data.json')
-        .then(data => setProducts(data.data))
-        .catch(err => setError(err))
-        .finally(()=> setLoading(false))
+  fetchData()
+
+       
     },[])
     return {products, loading, error}
 };

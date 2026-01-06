@@ -5,7 +5,6 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthConText } from "../../Context/AuthContext/AuthContext";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 
-
 const Register = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -20,27 +19,26 @@ const Register = () => {
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
-    //    if (!passwordRegex.test(password)) {
-    //   setError(
-    //     "Password must be at least 6 characters and include 1 lowercase, 1 uppercase, and 1 special character"
-    //   );
-    //   return;
-    // }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+       if (!passwordRegex.test(password)) {
+      setError(
+        "Password must be at least 6 characters and include 1 lowercase, 1 uppercase, and 1 special character"
+      );
+      return;
+    }
     setError("");
     setRegisterSuccess(false);
 
     createUser(email, password)
-
       .then((result) => {
         console.log(result.user);
         sendEmailVerification(result.user)
-        .then(() => {
-        alert("Please verification your email")
-      })
-      .catch((error) =>{
-        setError(error.message)
-      })
+          .then(() => {
+            alert("Please verification your email");
+          })
+          .catch((error) => {
+            setError(error.message);
+          });
 
         setRegisterSuccess(true);
         e.target.reset();
@@ -50,22 +48,18 @@ const Register = () => {
           photoURL: photo,
         };
         updateProfile(result.user, profile)
-          .then(() => {
-            
-          })
+          .then(() => {})
           .catch((error) => {
             console.log(error.message);
-          }).finally(() =>{
-            setLoading(false)
           })
+          .finally(() => {
+            setLoading(false);
+          });
       })
       .catch((error) => {
         console.log(error.message);
-      })
-
-     
+      });
   };
-
 
   const handleRegistershwoPassword = (event) => {
     event.preventDefault();
@@ -102,16 +96,16 @@ const Register = () => {
                 name="email"
               />
               <label className="label">Password</label>
-              <div>
+              <div className="relative">
                 <input
                   type={registerShowPassword ? "text" : "password"}
-                  className="input relative"
-                  placeholder="Password"
+                  className="input w-full"
                   name="password"
                 />
                 <button
+                  type="button"
                   onClick={handleRegistershwoPassword}
-                  className=" btn-xs absolute right-13 top-80"
+                  className="absolute right-3 top-3"
                 >
                   {registerShowPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
@@ -125,7 +119,6 @@ const Register = () => {
             {error && <p className="text-red-500">{error}</p>}
           </form>
           <p className="text-center">
-        
             Don't have an Account?
             <Link to="/login" className="text-blue-600 underline">
               Log Here

@@ -25,24 +25,24 @@ const Profile = () => {
   };
 
   return (
-    <div className="my-14 py-14 w-sm mx-auto bg-gray-200 rounded-2xl shadow-lg">
+    <div className="my-14 py-10 w-full max-w-sm mx-auto bg-gray-200 rounded-2xl shadow-lg px-4">
       <div className="flex justify-center">
         <img
-          className=" w-40 h-40 rounded-full flex justify-center "
+          className="w-28 h-28 sm:w-40 sm:h-40 rounded-full object-cover "
           src={user?.photoURL || "https://i.ibb.co.com/fzHgBZ2d/images-15.jpg"}
           alt=""
         />
       </div>
       <div className="pt-5 ml-7 ">
-        <div className=" flex flex justify-start gap-3">
-          <h3 className="font-semibold text-2xl">Name :</h3>
-          <p className="font-normal text-2xl">
+        <div className=" flex justify-start gap-3">
+          <h3 className="font-semibold text-lg sm:text-xl">Name :</h3>
+          <p className="font-normal text-lg sm:text-xl">
             {user?.displayName || "your name"}
           </p>
         </div>
         <div className=" flex flex justify-start gap-3 py-1">
-          <h3 className="font-semibold text-2xl">E-mail :</h3>
-          <p className="font-normal text-2xl">{user?.email}</p>
+          <h3 className="font-semibold text-lg sm:text-xl">E-mail :</h3>
+          <p className="font-normal text-lg sm:text-xl">{user?.email}</p>
         </div>
       </div>
 
@@ -59,7 +59,7 @@ const Profile = () => {
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <form onSubmit={handleProfile}>
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div className="card bg-base-100 shadow-2xl">
               <div className="card-body">
                 <fieldset className="fieldset">
                   <label className="label">Name</label>

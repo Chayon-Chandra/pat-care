@@ -7,6 +7,7 @@ import BookServiceForm from "../BookServiceForm/BookServiceForm";
 const ServiceDetails = () => {
   const { id } = useParams();
   const { products, loading, error } = useProductes();
+  console.log(products, loading)
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (error) return <p className="text-center mt-10">Error loading service</p>;

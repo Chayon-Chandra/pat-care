@@ -66,7 +66,7 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         <div className="pr-3 relative group">
-           <img className="w-10 h-10 rounded-full object-cover cursor-pointer " src={user?.photoURL ||"https://i.ibb.co.com/fzHgBZ2d/images-15.jpg"} alt="" />
+           <img className="w-10 h-10 rounded-full object-cover cursor-pointer " referrerPolicy="no-referrer" src={user?.photoURL ||"https://i.ibb.co.com/fzHgBZ2d/images-15.jpg"} alt="" />
             <span className="absolute right-full top-1/2 -translate-y-1/2 mr-2 bg-black text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               {user?.displayName || "User Name"}
             </span>
