@@ -1,16 +1,69 @@
-# React + Vite
+# 01. project name: Pat Care.
+# 02. purpose: Pet Care in Winter.
+# 03. 🌟 Key Features of Your Website :
+🔐 Authentication & Security
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Firebase Authentication (Email & Password login)
 
-Currently, two official plugins are available:
+Google Sign-In integration
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Email verification system for new users
 
-## React Compiler
+Password reset (Forgot password)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Secure logout functionality
 
-## Expanding the ESLint configuration
+🔒 Protected Routing System
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Private routes for Profile & Service Details pages
+
+Automatic redirect to login for unauthorized users
+
+Previous page redirect after successful login
+
+Loading state handling during authentication check
+
+👤 User Profile Management
+
+View user profile information (Name, Email, Photo)
+
+Update profile name and profile picture
+
+Real-time UI update after profile changes
+
+Default profile image support
+
+🧭 Smooth User Experience
+
+Persistent login after page reload
+
+Smart navbar behavior based on auth state
+
+Email verification status handling
+
+Clean modal-based profile update system
+
+📱 Responsive Design
+
+Fully responsive layout (Mobile, Tablet, Desktop)
+
+Tailwind CSS & DaisyUI based modern UI
+
+Optimized profile and form layouts for small screens
+
+⚙️ Modern Frontend Stack
+
+React with Context API for global auth state
+
+Firebase for authentication & user management
+
+React Router with private route protection
+
+Clean, reusable component structure
+# 04. using npm packages: 
+1. react
+2. firebase
+3. tailwindcss
+4. daisyui
+5. react-icons
+6. axios
